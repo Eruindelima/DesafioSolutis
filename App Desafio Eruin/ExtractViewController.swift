@@ -32,6 +32,8 @@ class ExtractViewController: UIViewController, ExtractDelegate {
         extractUser.delegate = self
         extractUser.dataSource = self
         
+        SVProgressHUD.show()
+        
         gradientTableView()
         getData()
         requestExtract()
@@ -101,7 +103,6 @@ extension ExtractViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
-    
 }
 // MARK: - END TABLE VIEW
 
@@ -110,19 +111,25 @@ extension ExtractViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - LOGOUT
 extension ExtractViewController {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "logOut" {
-                let login = segue.destination as! LoginViewController
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
-    
-    @IBAction func logOutButton(_ sender: UIButton) {
-        DispatchQueue.main.async {
+    @IBAction func logOutButton(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Atenção", message: "Deseja mesmo sair?", preferredStyle: .alert)
+        
+        let exitAction = UIAlertAction(title: "Sair", style: .default, handler: {_ in
             self.performSegue(withIdentifier: "logOut", sender: self)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {_ in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        
+        alert.addAction(exitAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
         }
     }
-}
+
 // MARK: - END LOGOUT
 
 

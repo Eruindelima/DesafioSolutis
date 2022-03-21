@@ -5,6 +5,7 @@
 //abc123@
 
 import UIKit
+import SVProgressHUD
 
 class LoginViewController: UIViewController, AcessDelegate {
     
@@ -25,6 +26,8 @@ class LoginViewController: UIViewController, AcessDelegate {
         service.delegateLogInto = self
         userField.delegate = self
         passwordField.delegate = self
+        
+        
     }
     
     
@@ -64,6 +67,7 @@ extension LoginViewController: UITextFieldDelegate {
         
         if acessModel.validateUserField(userFiled) || acessModel.validateCPF(userFiled){
             if acessModel.validatePasswordField(passwordField) {
+                SVProgressHUD.show()
                 service.requestLogin(userName: userFiled, password: passwordField)
             } else {
                 warningLabel.text = "User or Password Invalid"
@@ -88,11 +92,11 @@ extension LoginViewController: UITextFieldDelegate {
 extension LoginViewController {
     @IBAction func loginButton(_ sender: UIButton) {
         
-        self.loginButton.isUserInteractionEnabled = false
+        self.loginButton.isUserInteractionEnabled = true
         
         guard let userField = userField.text else {return }
         guard let passwordField = passwordField.text else {return }
-        //self.performSegue(withIdentifier: "Information", sender: self)
+        
         validateFileds(userFiled: userField, passwordField: passwordField)
     }
     
@@ -100,11 +104,10 @@ extension LoginViewController {
         if segue.identifier == "Informations" {
             let login = segue.destination as! ExtractViewController
             login.user = user
+            SVProgressHUD.dismiss()
             self.dismiss(animated: false, completion: nil)
         }
     }
-    
-    
 }
 // MARK: - FINISH TRASITION VIEW
 
