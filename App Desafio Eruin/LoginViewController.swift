@@ -45,6 +45,7 @@ class LoginViewController: UIViewController, AcessDelegate {
             if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
                 nextField.resignFirstResponder()
             }
+            
             else {
                 textField.becomeFirstResponder()
             }
@@ -70,9 +71,11 @@ extension LoginViewController: UITextFieldDelegate {
                 SVProgressHUD.show()
                 service.requestLogin(userName: userFiled, password: passwordField)
             } else {
+                SVProgressHUD.dismiss()
                 warningLabel.text = "User or Password Invalid"
             }
         } else {
+            SVProgressHUD.dismiss()
             warningLabel.text = "User or Password Invalid"
         }
     }
