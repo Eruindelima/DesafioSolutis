@@ -70,13 +70,14 @@ extension LoginViewController: UITextFieldDelegate {
             if acessModel.validatePasswordField(passwordField) {
                 SVProgressHUD.show()
                 service.requestLogin(userName: userFiled, password: passwordField)
+                
             } else {
                 SVProgressHUD.dismiss()
                 warningLabel.text = "User or Password Invalid"
             }
         } else {
             SVProgressHUD.dismiss()
-            warningLabel.text = "User or Password Invalid"
+            warningLabel.text = "Wrong email"
         }
     }
     
@@ -84,6 +85,7 @@ extension LoginViewController: UITextFieldDelegate {
         DispatchQueue.main.async {
             self.loginButton.isUserInteractionEnabled = true
             self.user = user
+            SVProgressHUD.dismiss()
             self.performSegue(withIdentifier: "Informations", sender: self)
         }
     }
