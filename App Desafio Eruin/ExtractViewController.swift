@@ -14,7 +14,7 @@ class ExtractViewController: UIViewController, ExtractDelegate {
     
     var formattedData = DataFormatting()
     var extracts: [ValuesExtract] = []
-    var service = Service()
+    var serviceExtract = ServiceExtract()
     var user: AcessModel?
     
     @IBOutlet weak var userNameLabel: UILabel!
@@ -28,7 +28,7 @@ class ExtractViewController: UIViewController, ExtractDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        service.delegateExtract = self
+        serviceExtract.delegateExtract = self
         extractUser.delegate = self
         extractUser.dataSource = self
         
@@ -73,7 +73,7 @@ extension ExtractViewController {
 // MARK: - EXTRACT REQUEST
 extension ExtractViewController {
     func requestExtract() {
-        service.requestExtract(token: user!.token, delegate: service.delegateExtract as! ExtractDelegate)
+        serviceExtract.requestExtract(token: user!.token, delegate: serviceExtract.delegateExtract as! ExtractDelegate)
     }
 }
 // MARK: - END USER EXTRACTS INFORMATION

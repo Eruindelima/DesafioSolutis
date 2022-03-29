@@ -58,6 +58,9 @@ class LoginViewController: UIViewController, AcessDelegate {
             return true
         }
     }
+    func didErrorLog() {
+        self.didErrorLog()
+    }
 }
 // MARK: - VALIDATION LOGIN
 
