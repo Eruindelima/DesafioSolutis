@@ -64,5 +64,8 @@ class ServiceExtract {
             self.delegateExtract?.didExtract(extracts: extracts)
         }
     }
-    
 }
+
+
+
+// teste com autenticacao 
