@@ -65,7 +65,3 @@ class ServiceExtract {
         }
     }
 }
-
-
-
-// teste com autenticacao 
