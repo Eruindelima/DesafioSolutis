@@ -29,7 +29,7 @@ struct ValidationAcessModel {
     }
     
     func validatePasswordField(_ password: String) -> Bool {
-        let passwordRegex = "^(.*[a-z]*.)(.*[0-9]*.)(.*[!@#$%^&*]*.)$"
+        let passwordRegex = "^(.*[a-z]*.)(.*[0-9]*.)(.*[!@#$%^&*](1,32))$"
             let validateRegex = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return validateRegex.evaluate(with: password)
     }
